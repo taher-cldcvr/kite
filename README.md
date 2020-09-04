@@ -81,3 +81,24 @@ By default Java 7 is used. If you want to use Java 6, then add `-DjavaVersion=1.
 ```
 mvn install -DjavaVersion=1.6
 ```
+For building kite data GCP jar follow these steps
+
+```
+git clone ....
+git checkout -f kite-data-gcp
+cd kite/kite-data/kite-data-gcp
+mvn clean install -Dhadoop.profile=2
+```
+
+Copying Kite data GCP jar to sqoop
+
+```
+1. Upload jar to some gsc location
+2. SSH Dataproc cluster
+3. Get jar on to dataproc using command 
+    hdfs dfs -get gs://<bucket>/<folder>/kite-data-gcp-1.1.0.jar .
+4. Copy jar to sqoop lib folder 
+    sudo cp kite-data-gcp-1.1.0.jar /usr/lib/sqoop/lib/
+    sudo chmod 755 /usr/lib/sqoop/lib/kite-data-gcp-1.1.0.jar
+5. Relax ! 
+```
